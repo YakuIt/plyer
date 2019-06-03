@@ -22,6 +22,7 @@ class AndroidVibrator(Vibrator):
 
     def _vibrate(self, time=None, **kwargs):
         if vibrator:
+            print('SDK_INT', type(SDK_INT), SDK_INT)
             if SDK_INT >= 26:
                 pass
             else:
