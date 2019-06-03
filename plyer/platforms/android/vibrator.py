@@ -30,6 +30,7 @@ class AndroidVibrator(Vibrator):
         pattern = [int(1000 * time) for time in pattern]
 
         if vibrator:
+            print('SDK_INT', type(SDK_INT), SDK_INT)
             if SDK_INT >= 26:
                 pass
             else:
