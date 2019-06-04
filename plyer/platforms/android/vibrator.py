@@ -8,8 +8,9 @@ print('SDK_INT', type(SDK_INT), SDK_INT)
 
 Context = autoclass('android.content.Context')
 vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
-vibration_effect = autoclass('android.os.VibrationEffect')
 
+if SDK_INT >= 26:
+    vibration_effect = autoclass('android.os.VibrationEffect')
 
 
 class AndroidVibrator(Vibrator):
@@ -24,9 +25,7 @@ class AndroidVibrator(Vibrator):
 
     def _vibrate(self, time=None, **kwargs):
         if vibrator:
-            print('SDK_INT', type(SDK_INT), SDK_INT)
-            #if SDK_INT >= 26:
-            if SDK_INT >= 1:
+            if SDK_INT >= 26:
                 vibrator.vibrate(vibration_effect.createOneShot(int(1000 * time), vibration_effect.DEFAULT_AMPLITUDE))
             else:
                 vibrator.vibrate(int(1000 * time))
@@ -34,9 +33,7 @@ class AndroidVibrator(Vibrator):
         pattern = [int(1000 * time) for time in pattern]
 
         if vibrator:
-            print('SDK_INT', type(SDK_INT), SDK_INT)
-            #if SDK_INT >= 26:
-            if SDK_INT >= 1:
+            if SDK_INT >= 26:
                 vibrator.vibrate(vibration_effect.createWaveform(pattern, vibration_effect.DEFAULT_AMPLITUDE))
             else:
                 vibrator.vibrate(pattern, repeat)
