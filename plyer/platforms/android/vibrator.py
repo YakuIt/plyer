@@ -7,8 +7,7 @@ from plyer.platforms.android import SDK_INT
 
 Context = autoclass('android.content.Context')
 vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
-
-
+vibration_effect = autoclass('android.os.VibrationEffect')
 
 class AndroidVibrator(Vibrator):
     '''Android Vibrator class.
@@ -23,8 +22,9 @@ class AndroidVibrator(Vibrator):
     def _vibrate(self, time=None, **kwargs):
         if vibrator:
             print('SDK_INT', type(SDK_INT), SDK_INT)
-            if SDK_INT >= 26:
-                pass
+            #if SDK_INT >= 26:
+            if SDK_INT >= 1:
+                vibrator.vibrate(vibration_effect.createOneShot(int(1000 * time), vibration_effect.DEFAULT_AMPLITUDE))
             else:
                 vibrator.vibrate(int(1000 * time))
     def _pattern(self, pattern=None, repeat=None, **kwargs):
@@ -32,11 +32,11 @@ class AndroidVibrator(Vibrator):
 
         if vibrator:
             print('SDK_INT', type(SDK_INT), SDK_INT)
-            if SDK_INT >= 26:
-                pass
+            #if SDK_INT >= 26:
+            if SDK_INT >= 1:
+                vibrator.vibrate(vibration_effect.createWaveform(pattern, vibration_effect.DEFAULT_AMPLITUDE))
             else:
                 vibrator.vibrate(pattern, repeat)
-
 
     def _exists(self, **kwargs):
         if SDK_INT >= 11:
