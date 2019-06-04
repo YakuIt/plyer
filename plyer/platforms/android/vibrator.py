@@ -4,10 +4,13 @@ from jnius import autoclass
 from plyer.facades import Vibrator
 from plyer.platforms.android import activity
 from plyer.platforms.android import SDK_INT
+print('SDK_INT', type(SDK_INT), SDK_INT)
 
 Context = autoclass('android.content.Context')
 vibrator = activity.getSystemService(Context.VIBRATOR_SERVICE)
 vibration_effect = autoclass('android.os.VibrationEffect')
+
+
 
 class AndroidVibrator(Vibrator):
     '''Android Vibrator class.
