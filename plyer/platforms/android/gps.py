@@ -67,6 +67,7 @@ class AndroidGPS(GPS):
         min_distance = kwargs.get('minDistance')
         providers = self._location_manager.getProviders(False).toArray()
         for provider in providers:
+            print('provider >..>', provider)
             self._location_manager.requestLocationUpdates(
                 provider,
                 min_time,  # minTime, in milliseconds
